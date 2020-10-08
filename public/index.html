@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Os Normais Webchat</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <div class="links">
+                <a href="/about">Sobre</a>
+                <a href="/portfolio">Webchat</a>
+                <a href="/portfolio">Podcast</a>
+            </div>
+        </header>
+
+        <form id="chat">
+            <input type="text" id="username" autocomplete="off" placeholder="Digite seu nick">
+            <div class="messages"></div>
+            <input type="text" id="message" autocomplete="off" placeholder="Digite sua mensagem">
+            <button type="submit">Enviar</button>
+        </form>
+
+        <script type="text/javascript">
+            var socket = io('http://localhost:3000');
+
+            socket.on('receivedMessage', function(message) {
+                renderMessage(message);
+            })
+
+            socket.on('previousMessages', function(messages) {
+                for (message of messages) {
+                    renderMessage(message);
+                }
+            })
+
+            function renderMessage(message){
+                $('.messages').append('<div class="message">(' + message.time + ') - <strong>' + message.author + '</strong>: ' + message.message + '</div>');
+            }
+
+
+            $('#chat').submit(function(event){
+                event.preventDefault();
+
+                var author = $('#username').val();
+                var message = $('#message').val();
+
+                if(author.length && message.length){
+                    var messageObject = {
+                        author: author,
+                        message: message,
+                        time: new Date().toLocaleString()
+                    };
+
+                    socket.emit('sendMessage', messageObject);
+                    renderMessage(messageObject);
+                }
+            })
+        </script>
+
+        <script src="./scripts.js"></script>
+    </body>
+</html>

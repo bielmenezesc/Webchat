@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #00CED1;
+}
+
+html, body {
+    height: 100%;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+      background-color: var(--primary-color);
+      font-family: 'Source Sans Pro', sans-serif;
+  }
+
+  header {
+    padding: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    text-align: center;
+    box-shadow: 10px 10px 6px -2px rgba(0, 0, 0, 0.4);
+}
+
+.links {
+    font-size: 22px;
+    text-align: center; 
+}
+
+.links a + a {
+    margin-left: 32px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #777;
+    position: relative;
+}
+
+.links a.active {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.links a:hover {
+    color: var(--primary-color);
+}
+
+.links a::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    position: absolute;
+    background-color: var(--primary-color);
+    left: 0;
+    bottom: -4px;
+}
+
+.links a:hover::after {
+    width: 100%;
+    transition: width 700ms ease-in-out;
+}
+
+  #chat {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  input {
+    width: 600px;
+    border: 1px solid #ddd;
+    height: 50px;
+    padding: 0 20px;
+    font-size: 16px;
+    box-shadow: 10px 10px 6px -2px rgba(0, 0, 0, 0.4);
+  }
+  
+  button {
+    border: none;
+    width: 600px;
+    height: 50px;
+    font-size: 18px;
+    background: darkorange;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+    color: black;
+    margin-top: 10px;
+    box-shadow: 10px 10px 6px -2px rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 10px 10px 6px -2px rgba(0, 0, 0, 0.4);
+  }
+  
+  .messages {
+    background-color: white;
+    width: 600px;
+    height: 400px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 10px 10px 6px -2px rgba(0, 0, 0, 0.4);
+  }
